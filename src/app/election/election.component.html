@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" #electionForm="ngForm">
+  <div class="form-group">
+    <label for="name">Enter Name of Election</label>
+    <input type="text" class="form-control" id="name" required [(ngModel)]="election.name" name="name" #uname="ngModel">
+    <div [hidden]="uname.valid || uname.pristine" class="alert alert-danger">
+      Election Name is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="electionDate">Enter Date of Election</label>
+    <input type="text" class="form-control" id="electionDate" required [(ngModel)]="election.electionDate" name="electionDate"
+      #edate="ngModel">
+    <div [hidden]="edate.valid || edate.pristine" class="alert alert-danger">
+      Election Date is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="district">Enter District</label>
+    <input type="text" class="form-control" id="district" required [(ngModel)]="election.district" name="district"
+      #dist="ngModel">
+    <div [hidden]="dist.valid || dist.pristine" class="alert alert-danger">
+      District is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="constituency">Enter Name of Election</label>
+    <input type="text" class="form-control" id="constituency" required [(ngModel)]="election.constituency" name="constituency"
+      #cons="ngModel">
+    <div [hidden]="cons.valid || cons.pristine" class="alert alert-danger">
+      Constituency is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="countingDate">Enter Counting Date</label>
+    <input type="text" class="form-control" id="countingDate" required [(ngModel)]="election.countingDate" name="countingDate"
+      #cdate="ngModel">
+    <div [hidden]="cdate.valid || cdate.pristine" class="alert alert-danger">
+      Constituency is required
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!electionForm.form.valid" (click)="initiateElection(model)">
+    Submit </button> &nbsp;&nbsp;
+  <button type="button" class="btn btn-default" (click)="newElection(); electionForm.reset()"> Reset</button>
+</form>

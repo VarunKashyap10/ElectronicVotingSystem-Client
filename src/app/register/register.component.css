@@ -1,0 +1,67 @@
+form{
+    width: 70%;
+    align-content: center;
+    background-color:grey;
+    margin:auto;
+    padding:5%;
+    text-align: center;
+    border-radius: 25px;
+}
+.form-group{
+    margin:auto;
+}
+label{
+    margin:2%;
+}
+.row{
+    margin:2%;
+}
+button{
+    margin:2%;
+}
+
+
+/********************
+.progress-circle{
+  background-color :cadetblue;
+  border-radius: 50%;
+  display: inline-block;
+  height : 15rem;
+  margin: 4rem 2rem 0;
+  position :relative;
+  width :15rem;
+}
+.progress-circle:before{ 
+    align-items:center;
+    background-color: #fff;
+    border-radius: 50%;
+    content: '50%';
+    display :flex;
+    font-size: 3rem;
+    justify-content :center;
+    position: absolute ;
+    left :1rem;
+    right: 1rem;
+    top : 1rem;
+    bottom :1rem;
+    transition :transform .2s ease;
+}
+.progress-circle:after{
+    background-color: black;
+    border-radius :50%;
+    content :'';
+    display :inline-block;
+    height: 100%;
+    width :100%;
+}
+.progress-circle:hover:focus:before{
+      transform: scale(.8);
+    }
+
+    */
+
+    #progress-circle {
+        margin: 20px;
+        width: 200px;
+        height: 200px;
+      }

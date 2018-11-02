@@ -1,0 +1,181 @@
+<div id="progress-circle" >
+
+  </div>
+<div class="container">
+
+  <div [hidden]="submitted">
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <h2>Register Yourself</h2>
+      <hr>
+
+      <div class="form-group">
+        <div class="col-sm-6 col-md-6 col-lg-6 ">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" required [(ngModel)]="profile.firstName" name="firstName"
+            #fname="ngModel">
+          <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+            FirstName is required
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 ">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required [(ngModel)]="profile.lastName" name="lastName"
+            #lname="ngModel">
+          <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+            LastName is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6 col-md-6 col-lg-6 ">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender" required [(ngModel)]="profile.gender" name="gender" #gen="ngModel">
+            <option *ngFor="let pow of genders" [value]="pow">{{pow}}</option>
+          </select>
+          <div [hidden]="gen.valid || gen.pristine" class="alert alert-danger">
+            Gender is required
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="dateOfBirth">Date Of Birth</label>
+          <input type="date" class="form-control" id="dateOfBirth" required [(ngModel)]="profile.dateOfBirth" name="dateOfBirth"
+            #dob="ngModel">
+          <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
+            DOB is required
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <hr>
+
+      <div class="form-group">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <label for="street">Street</label>
+          <input type="text" class="form-control" id="street" required [(ngModel)]="profile.street" name="street" #str="ngModel">
+          <div [hidden]="str.valid || str.pristine" class="alert alert-danger">
+            Street is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" required [(ngModel)]="profile.city" name="city" #city="ngModel">
+          <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+            City is required
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="pincode">Pincode</label>
+          <input type="text" class="form-control" id="pincode" required [(ngModel)]="profile.pincode" name="pincode"
+            #pnc="ngModel">
+          <div [hidden]="pnc.valid || pnc.pristine" class="alert alert-danger">
+            Pincode is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="mobileNo">Mobile Number</label>
+          <input type="text" class="form-control" id="mobileNo" required [(ngModel)]="profile.mobileNo" name="mobileNo"
+            #mn="ngModel">
+          <div [hidden]="mn.valid || mn.pristine" class="alert alert-danger">
+            Mobile Number is required
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="emailID">Email Address</label>
+          <input type="text" class="form-control" id="emailID" required [(ngModel)]="profile.emailID" name="emailID"
+            #email="ngModel">
+          <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            EmailID is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" required [(ngModel)]="profile.password" name="password"
+            #pwd="ngModel">
+          <div [hidden]="pwd.valid || pwd.pristine" class="alert alert-danger">
+            Password is required
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label for="cpassword">Confirm Password</label>
+          <input type="password" class="form-control" id="cpassword" required [(ngModel)]="cpassword" name="cpassword"
+            #pwd2="ngModel" required password-Check>
+          <div [hidden]="pwd2.valid || pwd2.pristine" class="alert alert-danger">
+            Password is required
+          </div>
+          <div [hidden]="pwd2.password-Check || pwd2.pristine" class="alert alert-danger">
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+      <br><br><br>
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid" (click)="initiateRegister(profile)">Submit</button>
+      &nbsp;&nbsp;
+      <hr>
+      <button type="button" class="btn btn-default" (click)="newUser(); registerForm.reset()">Reset Form</button>
+
+    </form>
+  </div>
+
+
+</div>
+
+
+<hr>
+<style>
+  .no-style .ng-valid {
+    border-left: 1px solid #CCC
+  }
+
+  .no-style .ng-invalid {
+    border-left: 1px solid #CCC
+  }
+</style>
+<script>
+  var app = angular.module('myApp', []);
+  app.directive('passwordCheck', function () {
+    return {
+      require: 'ngModel',
+      link: function (scope, element, attr, mCtrl) {
+        function myValidation(value) {
+          console.log(value);
+          console.log(document.getElementById("password").value);
+          if (value == document.getElementById("password").value) {
+            mCtrl.$setValidity('passM', true);
+          }
+          else {
+            mCtrl.$setValidity('passM', false);
+          }
+          return value;
+        }
+        mCtrl.$parsers.push(myValidation);
+      }
+    };
+  });
+</script>
+<script src="../../assets/scripts/progressbar">
+  updateProgress(){
+    //var pro=require("../../assets/scripts/progress");
+    var bar = new ProgressBar.Circle("progress-circle", {
+      strokeWidth: 6,
+      easing: 'easeInOut',
+      duration: 1400,
+      color: '#FFEA82',
+      trailColor: '#eee',
+      trailWidth: 1,
+      svgStyle: null
+    });
+    
+    bar.animate(0.5);  
+  }
+</script>

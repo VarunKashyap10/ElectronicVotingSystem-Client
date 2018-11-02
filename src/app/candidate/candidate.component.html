@@ -1,0 +1,77 @@
+<form #candidateForm="ngForm">
+
+    <div class="form-group">
+      <label for="name">Enter Name of Candidate</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="candidate.name" name="name"
+        #cname="ngModel">
+      <div [hidden]="cname.valid || cname.pristine" class="alert alert-danger">
+        Candidate Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="electionID">Enter Election ID of the contest</label>
+      <input type="text" class="form-control" id="electionID" required [(ngModel)]="candidate.electionID" name="electionID"
+        #eid="ngModel">
+      <div [hidden]="eid.valid || eid.pristine" class="alert alert-danger">
+        Election id is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="district">Enter district</label>
+      <input type="text" class="form-control" id="district" required [(ngModel)]="candidate.district" name="district"
+        #dist="ngModel">
+      <div [hidden]="dist.valid || dist.pristine" class="alert alert-danger">
+        District is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="constituency">Enter Constituency</label>
+      <input type="text" class="form-control" id="constituency" required [(ngModel)]="candidate.constituency"
+        name="constituency" #cons="ngModel">
+      <div [hidden]="cons.valid || cons.pristine" class="alert alert-danger">
+        Constituency is required
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="dateOfBirth">Enter Date</label>
+        <input type="text" class="form-control" id="dateOfBirth" required [(ngModel)]="candidate.dateOfBirth" name="dateOfBirth"
+          #dob="ngModel">
+        <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
+          Date of Birth is required
+        </div>
+      </div>
+
+    <div class="form-group">
+      <label for="mobileNo">Enter Mobile Number</label>
+      <input type="text" class="form-control" id="mobileNo" required [(ngModel)]="candidate.mobileNo" name="mobileNo"
+        #mobile="ngModel">
+      <div [hidden]="mobile.valid || mobile.pristine" class="alert alert-danger">
+        Mobile Number is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Enter Address</label>
+      <input type="text" class="form-control" id="addresss" required [(ngModel)]="candidate.address" name="address"
+        #add="ngModel">
+      <div [hidden]="add.valid || add.pristine" class="alert alert-danger">
+        Address is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emailID">Enter emailID</label>
+      <input type="text" class="form-control" id="emailID" required [(ngModel)]="candidate.emailID" name="emailID"
+        #email="ngModel">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        EmailID is required
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!candidateForm.form.valid" (click)="initiateCandidate()">
+      Submit </button>
+    <button type="button" class="btn btn-default" (click)="newCandidate(); candidateForm.reset()">Refresh</button>
+ 
+  </form>

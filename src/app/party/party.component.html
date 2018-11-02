@@ -1,0 +1,27 @@
+<form #partyForm="ngForm">
+    <div class="form-group">
+        <label for="name">Enter Name of Party</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="party.name" name="name" #uname="ngModel">
+        <div [hidden]="uname.valid || uname.pristine" class="alert alert-danger">
+          Party Name is required
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="leader">Enter Name of Leader</label>
+          <input type="text" class="form-control" id="leader" required [(ngModel)]="party.leader" name="leader" #lname="ngModel">
+          <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+            Leader is required
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="symbol">Enter Symbol</label>
+            <input type="text" class="form-control" id="symbol" required [(ngModel)]="party.symbol" name="symbol" #sym="ngModel">
+            <div [hidden]="sym.valid || sym.pristine" class="alert alert-danger">
+              Symbol is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!partyForm.form.valid" (click)="initiateParty()">
+              Submit </button>
+            <button type="button" class="btn btn-default" (click)="partyForm.reset()">Refresh</button>
+         
+</form>

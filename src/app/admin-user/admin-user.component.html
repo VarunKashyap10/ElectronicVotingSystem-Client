@@ -1,0 +1,266 @@
+<script>
+  function logoutCheck() {
+    document.getElementById("logout").setAttribute("")
+  }
+</script>
+<div class="container">
+  <h3>Welcome {{adminCred}} </h3>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" routerLink="/login" >Logout</a>
+        </h4>
+      </div>
+      <div id="logout" class="panel-collapse collapse">
+        <div class="panel-body">Logging out, Thank You!</div>
+        <div class="panel-footer">Panel Footer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#createElection">Create Election</a>
+        </h4>
+      </div>
+      <div id="createElection" class="panel-collapse collapse">
+     <div class="panel-body">
+          <app-election></app-election>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#viewElections">View All Elections</a>
+        </h4>
+      </div>
+      <div id="viewElections" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div style="overflow: auto;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Election id</th>
+                <th>Name</th>
+                <th>Election Date</th>
+                <th>District</th>
+                <th>Constituency</th>
+                <th>Counting Date </th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let ele of elections">
+                <td>{{ele.electionID}}</td>
+                <td>{{ele.name}}</td>
+                <td> {{ele.electionDate}} </td>
+                <td> {{ele.district}} </td>
+                <td> {{ele.constituency}} </td>
+                <td> {{ele.countingDate}} </td>
+                <td> <button class="btn btn-danger" (click)="deleteElection(ele)">Delete</button> </td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#addCandidate">Add Candidate</a>
+        </h4>
+      </div>
+      <div id="addCandidate" class="panel-collapse collapse">
+        <div class="panel-body">
+          <app-candidate></app-candidate>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#viewCandidateByElection">View Candidates in Election</a>
+        </h4>
+      </div>
+      <div id="viewCandidateByElection" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form #viewCandidateForm>
+
+            <div class="form-group">
+              <label for="ename">Enter Election Name</label>
+              <input type="text" class="form-control" #ename>
+              <div [hidden]="ename.valid || ename.pristine" class="alert alert-danger">
+                Election Name is required
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success" (click)="getCandidateByElection(ename)"> Fetch </button>
+          </form>
+          <div style="scroll-snap-type-x: auto;">
+          <table class="table table-striped">
+            <tr>
+              <th>CandidateID</th>
+              <th>Name </th>
+              <th>ElectionID</th>
+              <th>PartyID</th>
+              <th>District</th>
+              <th>Constituency</th>
+              <th>DateOfBirth</th>
+              <th>MobileNo</th>
+              <th>Address</th>
+              <th>EmailID</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let candid of candidates">
+              <td>{{candid.candidateID}}</td>
+              <td> {{candid.name}} </td>
+              <td> {{candid.electionID}} </td>
+              <td> {{candid.partyID}} </td>
+              <td> {{candid.district}} </td>
+              <td> {{candid.constituency}} </td>
+              <td> {{candid.dateOfBirth}} </td>
+              <td> {{candid.mobileNo}} </td>
+              <td> {{candid.address}} </td>
+              <td> {{candid.emailID}} </td>
+              <td> <button type="button" class="btn btn-danger" >Delete</button> </td>
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#viewRequests" (click)="viewApplicationRequests()">View Pending Requests</a>
+        </h4>
+      </div>
+      <div id="viewRequests" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div style="overflow: auto;">
+
+          <table class="table table-striped">
+            <tr>
+              <th>UserID</th>
+              <th>Constituency</th>
+              <th>Passed Status</th>
+              <th>Approved Status</th>
+              <th>Voter ID</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let app of applications">
+              <td> {{app.userID}} </td>
+              <td> {{app.constituency}} </td>
+              <td> {{app.passedStatus}} </td>
+              <td> {{app.approvedStatus}} </td>
+              <td> {{app.voterID}} </td>
+              <td> <button class="btn btn-danger">Delete</button> </td>
+            </tr>
+          </table>
+          </div>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#addParty">Add Party</a>
+        </h4>
+      </div>
+      <div id="addParty" class="panel-collapse collapse">
+        <div class="panel-body">
+          <app-party></app-party>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#viewParty">View Partys</a>
+        </h4>
+      </div>
+      <div id="viewParty" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div style="overflow: auto;">
+          <table class="table table-striped">
+            <tr>
+              <th>Party ID</th>
+              <th>Name</th>
+              <th>Leader</th>
+              <th>Symbol</th>
+            </tr>
+            <tr *ngFor="let party of partys">
+              <td> {{party.partyID}} </td>
+              <td> {{party.name}}</td>
+              <td> {{party.leader}} </td>
+              <td> {{party.symbol}} </td>
+            </tr>
+          </table>
+        </div>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#changePassword">Change Password</a>
+        </h4>
+      </div>
+      <div id="changePassword" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form #changePasswordForm>
+            <div class="form-group">
+              <label for="password">Enter Password</label>
+              <input type="text" class="form-control" #pass>
+              <div [hidden]="pass.valid || pass.pristine" class="alert alert-danger">
+                Password is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <input type="text" class="form-control" #pass2>
+              <div [hidden]="pass2.valid || pass2.pristine" class="alert alert-danger">
+                Password confirmation is required
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="changePassword(pass,pass2)">Change</button>
+          </form>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

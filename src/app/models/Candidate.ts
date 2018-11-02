@@ -1,0 +1,32 @@
+export class Candidate{
+    candidateID:String;
+    name:String;
+    electionID:String;
+    partyID:String;
+    district:String;
+    constituency:String;
+    dateOfBirth:String;
+    mobileNo:String;
+    address:String;
+    emailID:String;
+    constructor( 
+        name:String,
+        electionID:String,
+        partyID:String,
+        district:String,
+        constituency:String,
+        dateOfBirth:String,
+        mobileNo:String,
+        address:String,
+        emailID:String){
+            this.name=name;
+            this.electionID=electionID;
+            this.partyID=partyID;
+            this.district=district;
+            this.constituency=constituency;
+            this.dateOfBirth=dateOfBirth;
+            this.mobileNo=mobileNo;
+            this.address=address;
+            this.emailID=emailID;
+    }
+}
